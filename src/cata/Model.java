@@ -9,6 +9,7 @@ public class Model {
 	private Produit produit=new Produit();
 	private String mode="ajout";
 	private String errors="0";
+	private ICatalogueMetier metier;
 	
 	public String getErrors() {
 		return errors;
@@ -27,8 +28,8 @@ public class Model {
 	}
 
 	public List<Produit> getProdsMC() {
-		CatalogueMetier cm=new CatalogueMetier();
-		prodsMC=cm.produitsParMc(motCle);
+		
+		prodsMC=metier.produitsParMc(motCle);
 		return prodsMC;
 	}
 
@@ -43,15 +44,13 @@ public class Model {
 	public void setProduit(Produit produit) {
 		
 		this.produit = produit;
-		CatalogueMetier mc=new CatalogueMetier();
-		mc.addProduit(this.produit);
+		metier.addProduit(this.produit);
 	}
 	
 	public void delete(String ref){
 		
 		try{
-			CatalogueMetier cm=new CatalogueMetier();
-			cm.deleteProduit(ref);
+			metier.deleteProduit(ref);
 		}catch(Exception e){
 			System.out.println("produit ne pas supprimer !");
 		}
@@ -59,8 +58,7 @@ public class Model {
 	}
 
 	public Produit find(String ref) {
-		CatalogueMetier cm=new CatalogueMetier();
-		Produit p=cm.findProduit(ref);
+		Produit p=metier.findProduit(ref);
 		return p;
 	}
 
@@ -73,9 +71,18 @@ public class Model {
 	}
 
 	public void update(Produit produit2) {
-		CatalogueMetier cm=new CatalogueMetier();
-		cm.updateProduit(produit2);
+		metier.updateProduit(produit2);
 		
 	}
+
+	public ICatalogueMetier getMetier() {
+		return metier;
+	}
+
+	public void setMetier(ICatalogueMetier metier) {
+		this.metier = metier;
+	}
+
+	
 	
 }

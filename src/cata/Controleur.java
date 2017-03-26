@@ -8,14 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import metier.CatalogueMetier;
+import metier.ICatalogueMetier;
 import metier.Produit;
 
 public class Controleur extends HttpServlet {
-
+	ICatalogueMetier metier;
+	Model model;
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		// TODO Auto-generated method stub
-		super.init(config);
+		metier=new CatalogueMetier();
+		model=new Model();
+		model.setMetier(metier);
+		
 	}
 	
 	
@@ -27,7 +32,7 @@ public class Controleur extends HttpServlet {
 	}
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Model model=new Model();
+		
 		
 		//search
 		try{
